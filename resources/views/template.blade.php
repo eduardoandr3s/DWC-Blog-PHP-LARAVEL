@@ -1,0 +1,12 @@
+<html>
+        <head>
+            @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+            <title>
+            @yield('title')
+            </title>
+        </head>
+        <body>
+            @include('partials.nav')
+            @yield('content')
+        </body>
+</html>

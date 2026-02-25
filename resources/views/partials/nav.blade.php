@@ -19,6 +19,12 @@
       <li class="nav-item active">
         <a class="nav-link" href="{{ route('posts.create') }}">New Post</a>
       </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ route('englishes.index') }}">List of Languages</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ route('englishes.create') }}">New Language</a>
+      </li>
     </ul>
   </div>
 </nav>

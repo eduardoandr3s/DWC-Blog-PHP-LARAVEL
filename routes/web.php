@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\EnglishController;
 
 
 Route::get('posts/newPost', [PostController::class, 'newPost']);
@@ -16,6 +17,8 @@ Route::get('/posts/{id}', [PostController::class, 'show'])
 ->name('post.show')
 ->where('id', "[0-9]+");
 
+
+Route::resource('englishes', EnglishController::class);
 
 Route::get('/', function () {
     return view('start');

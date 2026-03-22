@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find vendor/laravel/sail -name docker* -o -name Dockerfile)"
+    ]
+  }
+}

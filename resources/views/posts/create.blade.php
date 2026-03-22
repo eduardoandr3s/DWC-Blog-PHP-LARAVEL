@@ -23,16 +23,6 @@
    </div>
    @endif
   </div>
-  <div class="form-group">
-   <label for="user">User:</label>
-   <select class="form-control" name="user" id="user">
-    @foreach ($users as $user)
-     <option value="{{ $user->id }}">
-      {{ $user->login }}
-     </option>
-    @endforeach
-   </select>
-  </div>
   <input type="submit" name="send" value="Send"
    class="btn btn-dark btn-block">
  </form>

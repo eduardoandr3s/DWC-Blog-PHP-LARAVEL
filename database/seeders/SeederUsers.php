@@ -13,6 +13,11 @@ class SeederUsers extends Seeder
      */
     public function run(): void
     {
+        $usuario = new User();
+        $usuario->login = 'admin';
+        $usuario->password = bcrypt('admin');
+        $usuario->save();
+
         User::factory()->count(3)->create();
     }
 }

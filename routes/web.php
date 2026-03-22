@@ -3,7 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\EnglishController;
+use App\Http\Controllers\LoginController;
 
+Route::get('login', [LoginController::class, 'loginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('posts/newPost', [PostController::class, 'newPost']);
 

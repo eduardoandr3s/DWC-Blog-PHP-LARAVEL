@@ -23,22 +23,6 @@
    </div>
    @endif
 </div>
-<div class="form-group">
-<label for="user_id">User:</label>
-<select class="form-control" name="user_id" id="user_id">
-@foreach ($users as $user)
- @if ($user->id==$post->user_id)
-  <option value="{{ $user->id }}" selected>
-   {{ $user->login }}
-  </option>
- @else
-  <option value="{{ $user->id }}">
-   {{ $user->login }}
-  </option>
- @endif
-@endforeach
-</select>
-</div>
 <input type="submit" name="send" value="Send"
  class="btn btn-dark btn-block">
 </form>

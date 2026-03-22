@@ -16,9 +16,10 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $login = fake()->unique()->userName();
         return [
-            'login' => fake()->unique()->userName(),
-            'password' => fake()->word()
+            'login' => $login,
+            'password' => bcrypt($login)
         ];
     }
 }

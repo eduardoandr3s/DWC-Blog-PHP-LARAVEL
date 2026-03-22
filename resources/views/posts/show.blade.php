@@ -7,6 +7,8 @@
  <h1>Title: {{$post->title}}</h1>
  <h2>Content: {{$post->content}}</h2>
  <h4>Timestamp: {{$post->created_at}}</h4>
+
+ @if(auth()->check() && auth()->user()->id == $post->user_id)
                      <form action="{{ route('posts.destroy', $post) }}" method="POST">
                         @method('DELETE')
                         @csrf
@@ -16,5 +18,6 @@
                         @csrf
                         <button class="btn bg-success">Update</button>
                     </form>
+ @endif
 
 @endsection

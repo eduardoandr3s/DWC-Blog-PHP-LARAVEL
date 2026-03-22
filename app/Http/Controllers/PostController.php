@@ -8,8 +8,13 @@ use Symfony\Component\Routing\Route;
 use App\Models\Post;
 use App\Models\User;
 
-class PostController extends Controller
+class PostController extends \Illuminate\Routing\Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -24,8 +29,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $users = User::get();
-        return view('posts.create', compact('users'));
+        return view('posts.create');
     }
 
     /**
@@ -49,7 +53,7 @@ class PostController extends Controller
         $post = new Post();
         $post->title = $request->get('title');
         $post->content = $request->get('content');
-        $post->user()->associate(User::findOrFail($request->get('user')));
+        $post->user()->associate(auth()->user());
         $post->save();
         return redirect()->route('posts.index');
     }
@@ -68,8 +72,10 @@ class PostController extends Controller
     public function edit(string $id)
     {
         $post = Post::findOrFail($id);
-        $users = User::get();
-        return view('posts.edit', compact('post', 'users'));
+        if (auth()->user()->id != $post->user_id) {
+            return redirect()->route('posts.index');
+        }
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -91,9 +97,11 @@ class PostController extends Controller
         );
 
         $post = Post::findOrFail($id);
+        if (auth()->user()->id != $post->user_id) {
+            return redirect()->route('posts.index');
+        }
         $post->title = $request->get('title');
         $post->content = $request->get('content');
-        $post->user_id = $request->get('user_id');
         $post->save();
         return redirect()->route('posts.index');
     }
@@ -103,6 +111,9 @@ class PostController extends Controller
      */
     public function destroy(post $post)
     {
+        if (auth()->user()->id != $post->user_id) {
+            return redirect()->route('posts.index');
+        }
         $post->delete();
         return redirect()->route('posts.index');
     }
